@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Component} from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Shelf from './Shelf'
@@ -6,7 +6,7 @@ import Book from './Book'
 import {Link} from 'react-router-dom'
 import {Route} from 'react-router-dom'
 
-class BooksApp extends React.Component {
+class BooksApp extends Component {
     state = {
         books: [],
         query: '',
@@ -14,10 +14,10 @@ class BooksApp extends React.Component {
     };
 
     componentDidMount() {
-        this.displayAllBooks();
+        this.displayBooks();
     };
 
-    displayAllBooks() {
+    displayBooks() {
         BooksAPI.getAll().then((books) => {
             this.setState({books})
         })
@@ -58,7 +58,7 @@ class BooksApp extends React.Component {
         //console.log("State of " + book.id + " changed to " + shelf);
         BooksAPI.update(book, shelf).then((books) => {
             if (books) {
-                this.displayAllBooks();
+                this.displayBooks();
                 this.updateQuery(this.state.query);
             }
         })
@@ -81,7 +81,7 @@ class BooksApp extends React.Component {
                                          )}>Close</Link>
                                    <div className="search-books-input-wrapper">
                                        <input type="text"
-                                              placeholder="Search by title or author"
+                                              placeholder="Search by [ title or author ]"
                                               value={query}
                                               onChange={(event) => this.updateQuery(event.target.value)}/>
 
