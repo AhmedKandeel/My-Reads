@@ -33,7 +33,7 @@ class BooksApp extends Component {
             this.setState({searchResults: ""});
             BooksAPI.search(query.trimLeft()).then((searchResults) => {
                 // console.log(searchResults);
-                if (Array.isArray(searchResults) && searchResults.length > 0) {
+                if (Array.isArray(searchResults) && searchResults.length > 0 && query === this.state.query) {
                     searchResults.map((searchBook, index) => {
                         let temp = this.state.books.filter((shelfBook) => {
                             return shelfBook.id === searchBook.id;
